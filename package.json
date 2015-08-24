@@ -1,0 +1,29 @@
+{
+  "name": "node-bgpnetworkasnchecker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Sheeter.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/binRick/bgpNetworkASNChecker.git"
+  },
+  "author": "Rick Blundell",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/binRick/bgpNetworkASNChecker/issues"
+  },
+  "homepage": "https://github.com/binRick/bgpNetworkASNChecker#readme",
+  "dependencies": {
+    "MD5": "^1.3.0",
+    "chalk": "^1.1.1",
+    "express": "^4.13.3",
+    "memory-cache": "^0.1.4",
+    "prettyjson": "^1.1.3",
+    "telnet-client": "^0.1.0",
+    "underscore": "^1.8.3"
+  }
+}
