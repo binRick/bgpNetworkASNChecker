@@ -33,7 +33,8 @@ app.get('/api/TestIsp/Network/:Network/:Subnet/:ASN/:Filter?', function(req, res
         ASN: req.params.ASN,
     };
     var cmd = 'sh ip bgp ' + setup.Network;
-    var key = md5(JSON.stringify(cmd));
+    setup.cmd = cmd;
+    var key = md5(JSON.stringify(cmd)) + md5(JSON.stringify(setup));
     if (cache.get(key)) {
         var Result = cache.get(key);
         if (req.params.Filter == 'brief')
@@ -45,6 +46,7 @@ app.get('/api/TestIsp/Network/:Network/:Subnet/:ASN/:Filter?', function(req, res
     connection.on('ready', function(prompt) {
         connection.exec(cmd, function(response) {
             var Result = {
+                router: Telnet_params.host,
                 setup: setup,
                 response: response,
                 Valid: response.split(setup.ASN + ' ' + ASN).length > 1,
@@ -53,7 +55,8 @@ app.get('/api/TestIsp/Network/:Network/:Subnet/:ASN/:Filter?', function(req, res
                 cache.put(key, Result, cacheMS);
 
             var CSV = 'col1,col2\ndat1,dat2';
-            console.log(Result);
+            //console.log(Result);
+            console.log(pj.render(Result));
             if (req.params.Filter == 'brief')
                 return res.json(Result.Valid);
             else
@@ -75,5 +78,5 @@ var server = app.listen(Config.port, function() {
     var host = server.address().address;
     var port = server.address().port;
 
-    console.log('Example app listening at http://%s:%s', host, port);
+    console.log('app listening at http://%s:%s', host, port);
 });
